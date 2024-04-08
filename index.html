@@ -2,6 +2,8 @@
 <html lang = "ro" >
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 		<title> CV - Pescariu </title>
 		
 		<base href = "resources/">
@@ -12,32 +14,45 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 		<!-- Favicon generated using https://favicon.io/favicon-generator/ -->
 	</head>
-	<body>
-		<main>
-			<header>
-				<img src = "github.png" class="roundIMG">
-			</header>
 	
-			<div class = "line"></div>
+	<body>
+		<header>
+			<a href="https://github.com/PescaMA">
+				<img src = "github.png" class="roundIMG" id = "githubPhoto" alt = "github profile photo">
+			</a>
 			
-			<section>
+			<nav> about
+				<div class ="dropdown-content">
+					<a href="../index.html#info-studies" class="menu-item"> Studies </a>
+					<a href="../index.html#info-achivements" class="menu-item"> Achivements </a>
+					<a href="../index.html#info-projects" class="menu-item"> Projects </a>
+				</div> 
+			</nav>
 			
-				<aside class = "emptyFlex"> </aside>
-				
-				<figure>
-					<img src = "photo.png" id = "photo" alt = "Photo of me">
-				</figure>
-				
-				<article class = "info">
-					<h1> Pescariu Matei-Alexandru </h1>
-					<h2> -student- </h2>
-					
-					<main>
-						
-					</main>
-				</article>
-				
-			</section>
+		</header>
+		
+	
+		<div class = "line"></div>
 			
+		<main>
+		
+			<aside class = "emptyFlex"> </aside>
+			
+			<figure>
+				<img src = "photo.png" class = "roundIMG" id = "photo" alt = "Photo of me">
+			</figure>
+			
+			<article class = "info">
+				<h2> Pescariu Matei-Alexandru </h2>
+				<h2> -student- </h2>
+				<section>
+					<h2>Information </h2>
+					<p id="info-studies" class = "new-content"></p>
+					<p id="info-achivements" class = "new-content"></p>
+					<p id="info-projects" class = "new-content"></p>
+				</section>
+			</article>
+			
+		</main>
 	</body>
 </html>

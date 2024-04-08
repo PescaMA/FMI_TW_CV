@@ -1,16 +1,68 @@
 body{
-	background:pink;
+	background:#036a96;
 	margin:0;
 }
 header{
+	display:flex;
 	height:50px;
 	padding:5px;
+	align-items:center;
 	border-bottom: solid black 2px;
+}
+header > a{
+	display:inline-block;
+	height:100%;
+	border-radius: 50%;
+}
+#githubPhoto{
+	height:100%;
 }
 .roundIMG{
 	border-radius: 50%;
-	height: 100%;
 }
+.roundIMG:hover{
+	cursor: pointer;
+	
+	animation-name: imageRotate;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+	animation-fill-mode: forwards;
+}
+
+@keyframes imageRotate {
+  from {
+		transform:rotate(0deg) scale(1);
+		}
+  to {
+			transform:rotate(360deg) scale(1.3);}
+}
+
+
+nav{
+	margin-left:10px;
+	font-size:30px;
+	display:inline-block;
+	border: solid 1px black;
+}
+
+.menu-item{
+	display:block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 99;
+}
+
+nav:hover .dropdown-content {
+  display: block;
+}
+
+
 
 .line{
 	position:absolute;
@@ -19,42 +71,40 @@ header{
 	margin-left: 1vw;
 	margin-right: 1vw;
 	width:calc(100% - 2vw);
-	background:peru;
+	min-width:200px;
+	background:	linear-gradient(to bottom right, #a61d1d, #9b925e);
 	
 }
 
 
-section{
-	display:flex;
-	flex-wrap: wrap;
+main{
+	display:grid;
+	grid-template-columns:1fr 2fr 10fr;
 	height:calc(100vh - 62px); /* header = 50 base + 10 padding + 2 border */
 	align-items: flex-start;
 }
 
 .emptyFlex{
-	flex:10%;
-	width: 10%;
 	height:100%;
 }
 
-h1,h2{
-	font-size:2em;
+h2{
+	font-size:20px;
 	text-align:center;
 }
 figure{
 	position:inline;
-	flex:20%;
-	width:20%;
-	background:#4682B4;
+	background:#035096;
 	margin:0;
 	height:100%;
 	z-index:2;
 	
 }
 #photo {
+	border: solid 2px white;
 	border-radius: 50%;
 	width:90%;
-	aspect-ratio:1;
+	aspect-ratio:1 / 1;
 	display: block;
 	margin-top: 5px;
 	margin-left: auto;
@@ -62,9 +112,97 @@ figure{
 	z-index:2;
 }
 .info{
-	flex:70%;
-	width:70%;
 	z-index: 3;
 }
 
+article{
+	display:grid;
+	grid-template-rows: 10vw 10vw auto;
+	height:100%;
+	
+}
+section > h2{
+	margin:0;
+	text-decoration:underline;
+	text-align:center;
+}
 
+
+.new-content{
+	font-size:40px;
+	white-space: pre-wrap;
+	display:block;
+	position:absolute;
+	text-align:left;
+}
+#info-studies:target:after{
+	content: "\
+	► I attended the National College \"Cantemir-Vodă\" from 2019 to 2023. \A\
+	► Studying for a bachelor's degree at Faculty of Mathematics and Computer Science since 2023.";
+}
+#info-achivements:target:after{
+	content: "\
+	► Silver medal at National (Romanian) computer science competition, ONI, 2023. \A\
+	► 2nd place at Acadnet, software interoperability software, national phase.\A\
+	► 3rd place at FMI No Stress 12 -2024.\A\
+	► Qualified for scholorship at University.";
+}
+#info-projects:target:after{
+	content: "\
+	► C++ (with Raylib) typeracer, mineSweeper.  \A\
+	► C++ console apps (connect-5, sorting algorithms, Non-deterministic finite automata builder).\A\
+	► Assembly Conway's game of life\A\
+	► all available on my github.";
+}
+
+
+@media all and (max-width: 600px){
+	main{
+		grid-template-columns:0fr 2fr 3fr;
+	}
+	.new-content{
+		font-size:30px;
+	}
+	.line{
+		height:40vw;
+	}
+	article 
+	{grid-template-rows:20vw 20vw auto;}
+	h2{
+		margin:0;
+		font-size:30px;
+	}
+}
+@media all and (max-width: 300px){
+	main{
+		grid-template-columns:0fr 2fr 3fr;
+	}
+	h2{
+		font-size:20px;
+	}
+	.new-content{
+		font-size:20px;
+	}
+}
+@media all and (min-width: 600px){
+		h2{
+	font-size:30px;
+	}
+}
+@media all and (min-width: 900px){
+		h2{
+	font-size:40px;
+	}
+}
+
+@media all and (min-width: 1200px){
+		h2{
+	font-size:50px;
+	}
+}
+
+@media all and (min-width: 1500px){
+		h2{
+	font-size:65px;
+	}
+}
