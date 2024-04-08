@@ -171,14 +171,15 @@ section > h2{
 #info-studies:target:after{
 	content: "\
 	► I attended the National College \"Cantemir-Vodă\" from 2019 to 2023. \A\
-	► Studying for a bachelor's degree at Faculty of Mathematics and Computer Science since 2023.";
+	► Studying for a bachelor's degree at Faculty of Mathematics and Computer Science since 2023. ";
 }
 #info-achivements:target:after{
 	content: "\
 	► Silver medal at National (Romanian) computer science competition, ONI, 2023. \A\
 	► 2nd place at Acadnet, software interoperability software, national phase.\A\
 	► 3rd place at FMI No Stress 12 -2024.\A\
-	► Qualified for scholorship at University.";
+	► Qualified for scholorship at University.\A\
+	► Supported early development of \"Facultatea mea\" ";
 }
 #info-projects:target:after{
 	content: "\
