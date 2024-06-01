@@ -1,5 +1,9 @@
-Felicitări, ai început bine proiectul. Ai îndeplinit aproape toate cerințele temei și e clar că te-ai străduit să faci o pagină cât mai corectă. Momentan nu ai însă foarte puțin conținut (text, imagini); aștept așadar să adaugi mai mult în partea a doua a proiectului. Meniul e cam simplu și el; ai putea să adaugi niște reguli css astfel încât să fie clar când trecem cu mouse-ul peste un element din meniu. Cât despre design,îți recomand două lucruri: mai întâi, să folosești pe cât posibil doar unități de măsură relative (em, procente etc.) pentru a dezvolta un design responsive. Apoi, în general nu e o idee bună să folosim perechea de culori roșu/verde, pentru că 40% din persoanele de sex masculin sunt daltoniste. Încearcă pe viitor să folosești altă paletă cromatică. Sigur, acesta e doar un detaliu mărunt, dar m-am gândit că ar putea fi util pentru viitor. Abia aștept să văd cum vei continua proiectul! Succes!
+Felicitări, ai început bine proiectul. Ai îndeplinit aproape toate cerințele temei și e clar că te-ai străduit să faci o pagină cât mai corectă. 
+1.Momentan nu ai însă foarte puțin conținut (text, imagini); aștept așadar să adaugi mai mult în partea a doua a proiectului. 2.Meniul e cam simplu și el; ai putea să adaugi niște reguli css astfel încât să fie clar când trecem cu mouse-ul peste un element din meniu. 
+3.Cât despre design,îți recomand două lucruri: mai întâi, să folosești pe cât posibil doar unități de măsură relative (em, procente etc.) pentru a dezvolta un design responsive. 
+4. Apoi, în general nu e o idee bună să folosim perechea de culori roșu/verde, pentru că 40% din persoanele de sex masculin sunt daltoniste. Încearcă pe viitor să folosești altă paletă cromatică. 
 
+Sigur, acesta e doar un detaliu mărunt, dar m-am gândit că ar putea fi util pentru viitor. Abia aștept să văd cum vei continua proiectul! Succes!
 Ai obținut 8.5 puncte din 10.
 
 O seară frumoasă,
