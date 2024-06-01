@@ -3,94 +3,6 @@ body{
 	margin:0;
 }
 
-header{
-	display:flex;
-	height:50px;
-	padding:5px;
-	align-items:center;
-	border-bottom: solid black 2px;
-}
-header > a{
-	display:inline-block;
-	height:100%;
-	border-radius: 50%;
-}
-#githubPhoto{
-	height:100%;
-}
-.roundIMG{
-	border-radius: 50%;
-}
-.roundIMG:hover{
-	cursor: pointer;
-	
-	animation-name: imageRotate;
-  animation-duration: 1s;
-  animation-timing-function: ease;
-	animation-fill-mode: forwards;
-}
-
-@keyframes imageRotate {
-  from {
-		transform:rotate(0deg) scale(1);
-		}
-  to {
-			transform:rotate(360deg) scale(1.3);}
-}
-
-
-nav{
-	background:#83bfb6;
-	margin-left:10px;
-	font-size:30px;
-	display:inline-block;
-	border: 4mm ridge rgb(35 47 61 / 78%);
-	border-radius:20%;
-}
-nav:hover{
-	z-index:10;
-	background: #81abff;
-}
-
-
-.menu-item{
-	display:block;
-}
-.menu-item:hover{
-	background-color: lemonchiffon;
-	transform: scale(1.5);
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 99;
-}
-.dropdown-content > a{
-	color:green;
-}
-
-nav:hover .dropdown-content{
-	animation: dropDown 1s ease-in-out forwards;
-  display: block;
-}
-
-@keyframes dropDown {
-  0%{
-		transform:translate(-20px,-30px);
-		opacity:0;
-	}
-	30%{
-		opacity:.6;
-	}
-	60%{
-		opacity:1;
-	}
-}
-
 
 .line{
 	position:absolute;
@@ -178,6 +90,9 @@ section > h2{
 	position:absolute;
 	text-align:left;
 }
+
+
+
 #info-studies:target:after{
 	content: "\
 	► I attended the National College \"Cantemir-Vodă\" from 2019 to 2023. \A\
@@ -197,6 +112,100 @@ section > h2{
 	► C++ console apps (connect-5, sorting algorithms, Non-deterministic finite automata builder).\A\
 	► Assembly Conway's game of life\A\
 	► all available on my github.";
+}
+
+
+
+footer{
+	display:flex;
+	height:50px;
+	padding:5px;
+	align-items:center;
+	border-bottom: solid black 2px;
+}
+footer > a{
+	display:inline-block;
+	height:100%;
+	border-radius: 50%;
+}
+#githubPhoto{
+	height:100%;
+}
+.roundIMG{
+	border-radius: 50%;
+}
+.roundIMG:hover{
+	cursor: pointer;
+	
+	animation-name: imageRotate;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+	animation-fill-mode: forwards;
+}
+
+@keyframes imageRotate {
+  from {
+		transform:rotate(0deg) scale(1);
+		}
+  to {
+			transform:rotate(360deg) scale(1.3);}
+}
+
+
+nav{
+	position:relative;
+	background:#83bfb6;
+	margin-left:10px;
+	font-size:30px;
+	display:inline-block;
+	border: 4mm ridge rgb(35 47 61 / 78%);
+	border-radius:20%;
+
+}
+nav:hover{
+	z-index:10;
+	background: #81abff;
+}
+
+
+.menu-item{
+	display:block;
+}
+.menu-item:hover{
+	background-color: lemonchiffon;
+	transform: scale(1.5);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 99;
+}
+.dropdown-content > a{
+	color:green;
+}
+
+nav:hover .dropdown-content{
+	animation: dropDown 1s ease-in-out forwards;
+  display: block;
+	bottom:100%;
+	
+}
+
+@keyframes dropDown {
+  0%{
+		transform:translate(-30px,20px);
+		opacity:0;
+	}
+	30%{
+		opacity:.6;
+	}
+	60%{
+		opacity:1;
+	}
 }
 
 
@@ -222,7 +231,7 @@ section > h2{
 }
 @media all and (max-width: 300px){
 	main{
-		grid-template-columns:0fr 2fr 3fr;
+		grid-template-columns:0fr 0fr 3fr;
 	}
 	h2{
 		font-size:20px;
