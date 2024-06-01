@@ -1,0 +1,69 @@
+Laboratory project
+For the project component of the course, each student must develop a website.
+The project will be carried out individually and will have two parts:
+
+HTML + CSS + responsive (teaching and assessment during lab 7, week 7)
+JavaScript (teaching and assessment at the last lab)
+You will be able to choose the theme of the website, but you will have to comply with a list of general requirements (see below).
+
+Examples of project theme:
+personal website
+website presenting a book, an author, a game, a band, a director, an actor or a film, etc.
+personal, travel, culinary blog, etc.
+website with educational content (tutorials, exploratory explanations, interactive exercises written in JavaScript)
+website presenting a bookstore, library, museum, art gallery, etc.
+website presenting a tourist objective
+commercial website
+a little game, an art project
+You can consult with the laboratory teacher for the choice of topic. We'll show you examples ;-)
+
+We encourage you to choose a theme that you like, however corny it may seem.
+
+Scoring for the project (30 points):
+HTML + CSS + responsive: 10 points
+JavaScript + Node.js: 20 points
+Minimum General Requirements for Part 1 (HTML + CSS):
+separate files for HTML and CSS
+site content must make sense (don't fill it with Lorem ipsum)
+the use of frameworks and libraries is not supported
+HTML:
+
+passing HTML validation tests http://validator.w3.org/
+using the semantic tags presented in the course/laboratory
+CSS:
+
+passing CSS validation tests https://jigsaw.w3.org/css-validator/
+the site must be responsive (media query, relative units, display types)
+using basic CSS selectors (by id, class, tag, elementContent, elementChild, nth child of a tag type :nth-of-type)
+specification of properties: width, height, color, background, font-size, border, padding, margin, display, etc.
+using columns for the layout of at least one page; making the layout without tables (using flex and grid)
+the site must contain a drop-down (or otherwise expandable) menu made with CSS
+the site must contain a transition that involves changing multiple properties at different time intervals
+the site must contain an animation that changes multiple properties of the same element
+! bonus points! for content generation using :after, :before (but make sense; be creative)
+Minimum General Requirements for Part 2 (JavaScript + Node.js misc):
+A. JavaScript
+
+separate file for JavaScript code
+change the style of an element or group of elements
+DOM manipulation (selection by id, tag, class, using CSS selectors)
+creating and deleting HTML elements
+using and modifying mouse and keyboard events
+property change
+functional inputs (eg: text/range/number/radio/checkbox input, select, texting)
+using setTimeout or setInterval
+using localStorage (to keep a collection of items in localStorage)
+using at least one method from the classes: Math, Array, String, Data
+randomly changing the values ​​of a property (for example: color, dimensions, position)
+using the classList, target, or currentTarget properties
+using the methods getComputedStyle, stopPropagation
+validating data from a form using regular expressions
+B. AJAX & Node.js
+
+get/post requests: retrieving data from a form
+Ajax requests with fetching data from a json file
+sessions: login/logout (with Node.js or Storage)
+page for the 404 error
+In addition to the implementation of these minimum requirements (the correct solution of which does not guarantee the maximum score), include in the project the treatment of other issues (of your choice) such as accessibility, internationalization (translation, special characters, etc.), use of canvas/svg, etc.
+
+Requirements may be modified and/or supplemented by each laboratory teacher.
