@@ -95,7 +95,8 @@ console.log("connection succsessful!");
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+	loggedIn: false,
 }));
 
 // for parsing application/json in POST requests.
