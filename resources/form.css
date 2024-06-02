@@ -33,6 +33,7 @@ input{
 	font-size: var(--font-size);
 }
 
+
 button{
 	background:skyblue;
 	border-radius: 55% 0%;
@@ -42,4 +43,7 @@ button{
 button:hover, .increase {
 	transform :scale(1.3);
 	transition: transform ease-in .5s;
+}
+iframe[seamless]{
+	margin:0;
 }

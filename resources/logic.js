@@ -22,43 +22,54 @@ window.onload = function(){
             }
         }
     }
-		
-		/// check if can log in
-		if(localStorage.getItem("loggedIn")){
-			if(localStorage.getItem("password") == 20367736)
-				console.log("LOGGED IN!");
-		}
-
 	
   formElem.onsubmit = async (e) => {
     e.preventDefault();
-		
+
 		const formData = new FormData(e.currentTarget);
 		let msg = validateForm();
 		if(msg){
 			alert(msg);
 			return;
 		}
+		/// if invalid form don't submit.
 		
-		for (const [key, value] of formData) {
-			if(key == "password") /// don't store password in plain text!
-				localStorage.setItem(key,value.hash());
-			else
-				localStorage.setItem(key,value);
-			
-			localStorage.setItem("loggedIn",true);
-		}
-		console.log(`Welcome ${localStorage['user_name']}`);
-		 
-		 let dataVector = {};
+		
 
+		 let dataVector = {};
+		 dataVector["loggedIn"] = localStorage.getItem("loggedIn");
 		formData.forEach(function(value, key){
 			if(key == 'password')
 				dataVector[key] = value.hash();
 			else
 				dataVector[key] = value;
 		});
-		 alert(await sendPost('../about',dataVector)); 
+		
+		
+		
+		const activeElement = document.activeElement;
+		let message;
+		if(activeElement.name === "signup")
+			message = await sendPost('../signup',dataVector);
+		else
+			message = await sendPost('../about',dataVector);
+		
+		
+		 
+		 if(message != ''){
+			  alert(message); 
+			 return;
+		 }
+		 
+		 
+		 for (const [key, value] of formData) {
+			if(key == "password") /// don't store password in plain text!
+				localStorage.setItem(key,value.hash());
+			else
+				localStorage.setItem(key,value);
+		}
+		localStorage.setItem("loggedIn",true);
+		
   };
 }
 
@@ -76,7 +87,7 @@ async function sendPost(path,data){
       if (response.ok) {
         // Redirect to loggedin.html if the request is successful
         window.location.href = path;
-				return true;
+				return "";
       } else {
         // Handle error responses
         const data = await response.json();
@@ -84,7 +95,7 @@ async function sendPost(path,data){
       }
     } catch (error) {
       console.error('Error:', error);
-			return "1";
+			return "FETCHING ERROR!";
     }
 }
 
