@@ -48,7 +48,7 @@ figure{
 	margin-top: 5px;
 	margin-left: auto;
   margin-right: auto;
-	transition:border-radius .8s ease-out 1s, transform ease-in 1s;
+	transition:border-radius .5s ease-out .5s, transform ease-in .5s;
 	z-index:2;
 }
 #photo:hover{
