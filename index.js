@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var http = require("http");
 const fs = require('fs');
 
 String.prototype.hash = function() {
@@ -29,8 +30,19 @@ function checkPassword (username, password) {
 		return false;
 }
 
+app.listen(5000);
+console.log("connection succsessful!");
 
-
+app.get("/",function(req,res){
+	res.sendFile('resources/form.html', { root: '.' });
+});
+app.get("/form.css",function(req,res){
+	res.sendFile('resources/form.css', { root: '.' });
+});
+app.get("/logic.js",function(req,res){
+	res.sendFile('resources/logic.js', { root: '.' });
+});
+	
 /*
 // la completarea formularului de login
 // verificăm datele introduse de utilizator
@@ -73,7 +85,4 @@ app.get('/logout', function(req, res) {
    console.log('logged out');
    res.redirect('/');
 });
-
-// serverul ascultă pe portul dat, 5000
-app.listen(5000); 
 */
