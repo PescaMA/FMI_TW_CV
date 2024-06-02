@@ -48,7 +48,44 @@ window.onload = function(){
 			
 			localStorage.setItem("loggedIn",true);
 		}
+		console.log(`Welcome ${localStorage['user_name']}`);
+		 
+		 let dataVector = {};
+
+		formData.forEach(function(value, key){
+			if(key == 'password')
+				dataVector[key] = value.hash();
+			else
+				dataVector[key] = value;
+		});
+		 alert(await sendPost('../about',dataVector)); 
   };
+}
+
+async function sendPost(path,data){
+	try {
+      const response = await fetch(path, {
+				
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        // Redirect to loggedin.html if the request is successful
+        window.location.href = path;
+				return true;
+      } else {
+        // Handle error responses
+        const data = await response.json();
+				return data.message;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+			return "1";
+    }
 }
 
 function validateForm(){

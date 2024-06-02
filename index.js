@@ -1,6 +1,8 @@
 var express = require('express');
+const bodyParser = require('body-parser')
 var app = express();
 var http = require("http");
+const path = require('path');
 const fs = require('fs');
 
 String.prototype.hash = function() {
@@ -15,14 +17,13 @@ String.prototype.hash = function() {
 }
 
 function checkPassword (username, password) {
-		let hashPass = password.hash();
     if (fs.existsSync("users.json")){
       let data = fs.readFileSync("users.json");
       let ob = JSON.parse(date);
      
       for (i in ob) {
 				if (ob[i].username == username)
-					if (ob[i].parola == hashPass) 
+					if (ob[i].parola == password) 
 						return true;
 					break;
       }
@@ -33,38 +34,36 @@ function checkPassword (username, password) {
 app.listen(5000);
 console.log("connection succsessful!");
 
+
+// for parsing application/json in POST requests.
+app.use(bodyParser.json()) 
+
+/// give access to every file present in the folder resources.
+app.use(express.static(path.join(__dirname, 'resources'))); 
+
+app.post("/about",function(req,res){
+
+	
+	let formData = req.body;
+	console.log(formData);
+	if(!checkPassword(formData.user_name, formData.password)){
+		res.status(400).send({ message: 'Invalid credentials' });
+		return;
+	}
+	res.sendFile('resources/about.html', { root: '.' });
+});
+app.get("/about",function(req,res){
+	res.sendFile('resources/about.html', { root: '.' });
+});
+
 app.get("/",function(req,res){
 	res.sendFile('resources/form.html', { root: '.' });
 });
-app.get("/form.css",function(req,res){
-	res.sendFile('resources/form.css', { root: '.' });
-});
-app.get("/logic.js",function(req,res){
-	res.sendFile('resources/logic.js', { root: '.' });
-});
+
+
+
 	
 /*
-// la completarea formularului de login
-// verificăm datele introduse de utilizator
-// setăm câmpul de sesiune username 
-// și facem redirecturi corespunzătoare
-app.post('/login', function(req, res) {
-   let form = new formidable.IncomingForm();
-   form.parse(req, function(err, fields, files) {
-       let user = verifica(fields.username, fields.parola);
-       // verificarea datelor de login
-
-      if(user){
-        req.session.username = user; 
-        // setez userul ca proprietate a sesiunii
-        console.log('logged in ' + user);
-        res.redirect('/logat'); 
-     }
-   else
-       req.session.username = false;  
-   });
-});
-
 // dacă utilizatorul s-a logat, încărcăm pagina
 // logout.ejs prin care îi confirmăm loginul
 // și afișăm un buton pentru logout
