@@ -1,7 +1,7 @@
 window.onload = function() {
 	
 	const body = document.body;
-	body.style.backgroundImage="url('d0971f47-7ed6-42fe-b4f2-2922ea91eb27.jpg')";
+	body.style.backgroundImage="url('images/cezaraBackground.jpg')";
 	
   const videos = document.getElementsByTagName("video");
   for (let v of videos) {

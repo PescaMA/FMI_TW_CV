@@ -1,4 +1,4 @@
-window.onload = function(){
+window.addEventListener('DOMContentLoaded', function(){
 	let nameDiv = document.getElementById('login');
 	
 	if(!nameDiv) 
@@ -13,18 +13,18 @@ window.onload = function(){
 	if(!localStorage.getItem('loggedIn')){
 		nameDiv.innerHTML = "Not logged in";
 	}
-	else
+	else{
+		
 		nameDiv.innerHTML = "Username: " +localStorage.getItem("user_name");
 	
-	let signOut = document.createElement("button");
-	signOut.innerHTML = "Sign out";
-	
-	nameDiv.appendChild(signOut);
-	
-	signOut.addEventListener("click", (event) => {
+		let signOut = document.createElement("button");
+		signOut.innerHTML = "Sign out";
+		
+		nameDiv.appendChild(signOut);
+		
+		signOut.addEventListener("click", (event) => {
 		localStorage.removeItem("loggedIn");
 		 window.location.href = "/";
 	});
-	
-	
-}
+	}
+});

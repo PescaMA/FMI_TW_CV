@@ -2,7 +2,9 @@
 <html lang ="eng">
 	<head>
 		<link rel="stylesheet" href="form.css">
+		<script src="footer.js"></script>
 		<script src="logic.js"></script>
+		
 	</head>
 	<body>
 		<form id="formElem">
@@ -21,8 +23,13 @@
 				</li>
 				
 				<li>
-					<button name = "signup" type="submit">Sign up</button>
-					<button name = "login" type="submit">Login</button>
+					<button class = "forLogin" name = "signup" type="submit">Sign up</button>
+					<button class = "forLogin" name = "login" type="submit">Login</button>
+				</li>
+				
+				<li>
+					<button class = "logged" name = "about">About</button>
+					<button class = "logged" name = "game">Game</button>
 				</li>
 		</ul>
 		</form>

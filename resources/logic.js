@@ -1,4 +1,4 @@
-window.onload = function(){
+window.addEventListener('DOMContentLoaded', function(){
 	
 	const formElem = document.getElementById('formElem');
 	const labels = document.getElementsByTagName('label');
@@ -23,10 +23,20 @@ window.onload = function(){
         }
     }
 	
+	addLoggedButtons();
+	
   formElem.onsubmit = async (e) => {
     e.preventDefault();
+		const activeElement = document.activeElement;
 
 		const formData = new FormData(e.currentTarget);
+		
+		if(activeElement.className == "logged"){
+				let message  = await sendPost(`/${activeElement.name}`,[]);
+				return;
+		}
+		
+		
 		let msg = validateForm();
 		if(msg){
 			alert(msg);
@@ -47,15 +57,9 @@ window.onload = function(){
 		
 		
 		
-		const activeElement = document.activeElement;
-		let message;
-		if(activeElement.name === "signup")
-			message = await sendPost('../signup',dataVector);
-		else
-			message = await sendPost('../about',dataVector);
 		
-		
-		 
+		let message  = await sendPost(`/${activeElement.name}`,dataVector);
+	
 		 if(message != ''){
 			  alert(message); 
 			 return;
@@ -69,8 +73,20 @@ window.onload = function(){
 				localStorage.setItem(key,value);
 		}
 		localStorage.setItem("loggedIn",true);
-		
   };
+	
+	
+});
+function addLoggedButtons(){
+	
+	if(!localStorage['loggedIn'])
+		return;
+	
+	let loggedButtons = document.getElementsByClassName("logged");
+	 for(e of loggedButtons){
+		 e.style.display = "block";
+	 }
+
 }
 
 async function sendPost(path,data){

@@ -63,19 +63,28 @@ function addUser(username,password){
 		}
 		
 		// Read the existing JSON data from the file
-  let data = fs.readFileSync(usersPath);
+ /// let data = ;
 
   // Parse the JSON data into a JavaScript object
-  let users = JSON.parse(data);
+  let users = JSON.parse(fs.readFileSync(usersPath));
 
   // Add the new user data to the JavaScript object
   users.push({ "username": username, "parola": password });
 
   // Write the updated JavaScript object back to the JSON file
+	
   fs.writeFileSync(usersPath, JSON.stringify(users, null, 2)); /// write readable
 
   console.log("User added successfully.");
   return true;
+}
+
+function sendLogged(req,res,path){
+	console.log("in sendLogged: " + session.loggedIn);
+	if(session.loggedIn)	
+		res.sendFile(path, { root: '.' });
+	else
+		res.sendFile('resources/404.html', { root: '.' });
 }
 
 app.listen(5000);
@@ -106,27 +115,29 @@ app.post("/signup",function(req,res){
 			return;
 		}
 		addUser(formData.user_name,formData.password);
-		req.session.loggedIn = true;
-		res.sendFile('resources/form.html', { root: '.','loggedIn': true });
+		session.loggedIn = true;
+		
+		console.log("ACUMA : " + session.loggedIn);
+		
+		sendLogged(req,res,'resources/form.html');
+
 	}
 	catch (error) {
     console.error('Error parsing JSON:', error);
 		res.status(400).send({ message: "internal server error"});
 		return;
   }
-	
-	
 });
+
+
 
 app.get("/signup",function(req,res){
-	if(!req.session.loggedIn){
-		res.sendFile('resources/404.html', { root: '.' });
-		return;}
-	res.sendFile('resources/about.html', { root: '.' });
+	
+	sendLogged(req,res,'resources/form.html');
 });
 
-app.post("/about",function(req,res){
-
+app.post("/login",function(req,res){
+	
 	let formData = req.body;
 	///console.log(formData);
 	
@@ -140,28 +151,47 @@ app.post("/about",function(req,res){
 			res.status(400).send({ message: 'Invalid credentials' });
 			return;
 		}
+		
+		session.loggedIn = true;
+		sendLogged(req,res,'resources/form.html');
+		
 	}
 	catch (error) {
     console.error('Error parsing JSON:', error);
 		res.status(400).send({ message: "internal server error"});
 		return;
   }
-	req.session.loggedIn = true;
-	res.sendFile('resources/about.html', { root: '.' });
+	
+});
+
+app.get("/login",function(req,res){
+	sendLogged(req,res,'resources/form.html');
+	
+});
+
+app.post("/about",function(req,res){
+	sendLogged(req,res,'resources/about.html');
+});
+app.get("/about",function(req,res){
+	///console.log("ACUMA : " + req.session);
+	///console.log("ACUMA : " + req["session"]["loggedIn"]);
+	sendLogged(req,res,'resources/about.html');
+});
+
+app.post("/game",function(req,res){
+	
+	res.sendFile('resources/game.html', { root: '.' });
 	 
 });
 
-
-app.get("/about",function(req,res){
-	if(!req.session.loggedIn){
-		res.sendFile('resources/404.html', { root: '.' });
-		return;}
-	res.sendFile('resources/about.html', { root: '.' });
+app.get("/game",function(req,res){
+	sendLogged(req,res,'resources/game.html');
+	
 });
 
 app.get("/",function(req,res){
 	res.sendFile('resources/form.html', { root: '.' });
-	req.session.loggedIn = false;
+	session.loggedIn = false;
 });
 
 ///The 404 Route (ALWAYS Keep this as the last route)
