@@ -48,7 +48,6 @@ function checkPassword (username, password) {
 	 
 		for (i in ob) {
 			if (ob[i].username == username){
-				console.log(password);
 				if (ob[i].parola == password) 
 					return true;
 				break;
@@ -82,6 +81,8 @@ function addUser(username,password){
 app.listen(5000);
 console.log("connection succsessful!");
 
+
+/// for session to remember loggedIn.
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
@@ -119,15 +120,15 @@ app.post("/signup",function(req,res){
 
 app.get("/signup",function(req,res){
 	if(!req.session.loggedIn){
-		console.log("not logged in get signup!");
-		res.sendFile('resources/404.html', { root: '.' });return;}
+		res.sendFile('resources/404.html', { root: '.' });
+		return;}
 	res.sendFile('resources/about.html', { root: '.' });
 });
 
 app.post("/about",function(req,res){
 
 	let formData = req.body;
-	console.log(formData);
+	///console.log(formData);
 	
 	 try {
 		if(!checkUsername(formData.user_name)){
@@ -153,8 +154,8 @@ app.post("/about",function(req,res){
 
 app.get("/about",function(req,res){
 	if(!req.session.loggedIn){
-		console.log("not logged in get about!");
-	res.sendFile('resources/404.html', { root: '.' });return;}
+		res.sendFile('resources/404.html', { root: '.' });
+		return;}
 	res.sendFile('resources/about.html', { root: '.' });
 });
 
@@ -163,28 +164,9 @@ app.get("/",function(req,res){
 	req.session.loggedIn = false;
 });
 
+///The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', (req, res) => {
+ res.status(404);
+  res.sendFile('resources/404.html', { root: '.' });
 
-
-	
-/*
-// dacă utilizatorul s-a logat, încărcăm pagina
-// logout.ejs prin care îi confirmăm loginul
-// și afișăm un buton pentru logout
-app.get('/logat', function(req, res) {
-   res.render('pagini/logout',{'nume':req.session.username});
 });
-
-// la vizitarea home, încărcăm pagina de login
-app.get('/', function(req, res) {
-   res.render('pagini/log');
-});
-
-// dacă am dat click pe linkul 'logout',
-// scoatem utilizatorul din sesiune și 
-// facem redirect către pagina inițială de login
-app.get('/logout', function(req, res) {
-   req.session.username = false;
-   console.log('logged out');
-   res.redirect('/');
-});
-*/

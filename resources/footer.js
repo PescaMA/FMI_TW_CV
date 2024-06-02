@@ -19,11 +19,11 @@ window.onload = function(){
 	let signOut = document.createElement("button");
 	signOut.innerHTML = "Sign out";
 	
-	console.log(nameDiv.appendChild(signOut));
+	nameDiv.appendChild(signOut);
 	
 	signOut.addEventListener("click", (event) => {
 		localStorage.removeItem("loggedIn");
-		 window.location.href = "../";
+		 window.location.href = "/";
 	});
 	
 	
