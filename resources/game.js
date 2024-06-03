@@ -3,18 +3,34 @@ window.addEventListener('DOMContentLoaded', function(){
 	let enemyNames = getProfi();
 	
 	let enemies = [];
-	const createEnemy = setInterval( () =>{
-		addEnemy(enemies,enemyNames);
-	},1000);
+	spawnEnemyAtInterval(enemies,enemyNames);
 	
-	addEnemy(enemies,enemyNames);
-	deleteEnemy(enemies,"enemy-1");
+	const runCollision = setInterval( () =>{
+		checkEnemyCollisions(enemies);
+	},100);
 	
 	const runGame = setInterval( () =>{
 		enemies.forEach((enemy) => advanceEnemy(enemy));
 	},500);
 	
 });
+
+
+let intervalTime = 3000; // Start with 3 seconds
+function spawnEnemyAtInterval(enemies, enemyNames){
+	
+	const minimumIntervalTime = 500; // Minimum time interval (e.g., 0.5 seconds)
+	const decreaseRate = 100; // Decrease the interval time by 100ms each iteration
+
+  addEnemy(enemies, enemyNames);
+
+  // Decrease the interval time but do not go below the minimum interval time
+  intervalTime = Math.max(intervalTime - decreaseRate, minimumIntervalTime);
+
+  // Set the next enemy creation with the updated interval time
+  setTimeout(() => spawnEnemyAtInterval(enemies, enemyNames), intervalTime);
+
+}
 
 function getProfi(){
 	const filenames = [
@@ -48,6 +64,7 @@ filenames.forEach((e,i,v) =>{
 	return filenames;
 }
 function addEnemy(enemies, enemyNames){
+	
 	let chosenEnemy = getRandomElement(enemyNames);
 	///let img = document.getElementById("enemy" + enemies.length);
 	let	img = document.createElement("img");
@@ -56,26 +73,25 @@ function addEnemy(enemies, enemyNames){
 	img.style.maxWidth = "15vmin";
 	img.style.maxHeight = "20vmin";
 	img.style.position = "absolute";
+	
+	 img.addEventListener('mouseover', handleEnemyHover);	
+	
 	enemies.push(img);
 	document.body.appendChild(img);
-	
 	spawnEnemy(img);
-	
-	
-	
-	
 }
 
-function deleteEnemy(enemies, enemy = "enemy0"){
-	
-	if(enemies.length == 0)
-		return;
-	
-	let i  = +enemy.slice(5);
-	if(i >= enemies.length || i < 0)
-		return;
-	
-	enemies[i].remove();
+ function handleEnemyHover(event) {
+		event.target.style.backgroundColor = 'red'; // Change color on hover
+		setTimeout(() => {
+			deleteEnemy(event.target);
+		}, 100);
+		/// console.log('Collision detected with', event.target);
+}
+
+
+function deleteEnemy(enemy){
+	enemy.remove();
 }
 
 function spawnEnemy(enemy){
@@ -86,8 +102,6 @@ function spawnEnemy(enemy){
 	
 	enemy.style.left = `${x}px`;
   enemy.style.top =  `${y}px`;
-	
-	console.log(x, y);
 	
 }
 
@@ -164,4 +178,44 @@ function getRandomInt(min = 0, max) {
 
 function getRandomElement(vector){
 	return vector[getRandomInt(0,vector.length-1)];
+}
+
+
+function getBoundingBox(element) {
+		const rect = element.getBoundingClientRect();
+		return {
+				x: rect.left,
+				y: rect.top,
+				width: rect.width,
+				height: rect.height,
+		};
+}
+
+function isColliding(box1, box2) {
+		return !(
+				box1.x > box2.x + box2.width ||
+				box1.x + box1.width < box2.x ||
+				box1.y > box2.y + box2.height ||
+				box1.y + box1.height < box2.y
+		);
+}
+
+function checkEnemyCollisions(enemies) {
+		for (let i = 0; i < enemies.length; i++) {
+				for (let j = i + 1; j < enemies.length; j++) {
+						const enemy1 = enemies[i];
+						const enemy2 = enemies[j];
+						const box1 = getBoundingBox(enemy1);
+						const box2 = getBoundingBox(enemy2);
+						if (isColliding(box1, box2)) {
+								console.log('Collision detected between enemies', i, 'and', j);
+								
+								deleteEnemy(enemy1);
+								deleteEnemy(enemy2);
+								enemies.splice(j,1);
+								enemies.splice(i,1);
+								
+						}
+				}
+		}
 }
