@@ -1,4 +1,6 @@
-const time = getTime();
+let time = getTime();
+let diff = 0;
+let pause = false;
 window.addEventListener('DOMContentLoaded', function(){
 	
 	let highscore = document.getElementsByTagName("main");
@@ -8,6 +10,29 @@ window.addEventListener('DOMContentLoaded', function(){
 	let timeEl = document.createElement('p');
 	document.body.appendChild(timeEl);
 	timeEl.innerHTML = getTime() - time;
+	
+	
+	// Disable right-click context menu on specific elements
+window.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+});
+// Disable mouse events
+window.addEventListener('mousemove', (event) => {
+    // Prevent default mousemove behavior
+    event.preventDefault();
+});
+// Detect cursor leaving the browser window
+document.addEventListener('mouseleave', (event) => {
+		pause = true;
+		diff = getTime();
+});
+document.addEventListener('mouseover', (event) => {
+		if(pause)
+			time += getTime() - diff;
+		pause = false;
+		diff = 0;
+});
+
 	
 	
 	let enemyNames = getProfi();
@@ -20,8 +45,10 @@ window.addEventListener('DOMContentLoaded', function(){
 	},100);
 	
 	const runGame = setInterval( () =>{
+		if(!pause){	
 		timeEl.innerHTML = "SCORE: " + getScore();
 		enemies.forEach((enemy) => advanceEnemy(enemy));
+		}
 	},500);
 	
 });
