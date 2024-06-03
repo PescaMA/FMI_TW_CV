@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', function() {
 	
 	const body = document.body;
 	body.style.backgroundImage="url('images/cezaraBackground.jpg')";
@@ -17,4 +17,4 @@ window.onload = function() {
 	document.onclick = function(){
 		window.location.href = "/";
 	};
-};
+});

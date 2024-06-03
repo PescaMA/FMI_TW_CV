@@ -79,9 +79,9 @@ function addUser(username,password){
   return true;
 }
 
-function sendLogged(req,res,path){
+function sendLogged(req,res,path,bypass=false){
 	console.log("in sendLogged: " + session.loggedIn);
-	if(session.loggedIn)	
+	if(session.loggedIn || bypass)	
 		res.sendFile(path, { root: '.' });
 	else
 		res.sendFile('resources/404.html', { root: '.' });
@@ -186,7 +186,7 @@ app.post("/game",function(req,res){
 });
 
 app.get("/game",function(req,res){
-	sendLogged(req,res,'resources/game.html');
+	sendLogged(req,res,'resources/game.html',true);
 	
 });
 

@@ -43,8 +43,6 @@ window.addEventListener('DOMContentLoaded', function(){
 			return;
 		}
 		/// if invalid form don't submit.
-		
-		
 
 		 let dataVector = {};
 		 dataVector["loggedIn"] = localStorage.getItem("loggedIn");
@@ -54,9 +52,6 @@ window.addEventListener('DOMContentLoaded', function(){
 			else
 				dataVector[key] = value;
 		});
-		
-		
-		
 		
 		let message  = await sendPost(`/${activeElement.name}`,dataVector);
 	
