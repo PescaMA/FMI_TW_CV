@@ -3,9 +3,16 @@ window.addEventListener('DOMContentLoaded', function(){
 	let enemyNames = getProfi();
 	
 	let enemies = [];
-	addEnemy(enemies,enemyNames);
+	const createEnemy = setInterval( () =>{
+		addEnemy(enemies,enemyNames);
+	},1000);
+	
 	addEnemy(enemies,enemyNames);
 	deleteEnemy(enemies,"enemy-1");
+	
+	const runGame = setInterval( () =>{
+		enemies.forEach((enemy) => advanceEnemy(enemy));
+	},500);
 	
 });
 
@@ -116,6 +123,39 @@ function getCoords(enemyWidth,enemyHeight){
 
   return { x, y };
 	
+}
+
+function advanceEnemy(enemy){
+	
+	let width = +window.getComputedStyle(enemy).getPropertyValue("left").slice(0,-2);
+	let height = +window.getComputedStyle(enemy).getPropertyValue("top").slice(0,-2);
+	
+	let [x,y] = advanceTowardsCenter (width,height);
+	
+	enemy.style.left = `${x}px`;
+  enemy.style.top =  `${y}px`;
+	
+	return {x,y};
+}
+	
+
+function advanceTowardsCenter(x, y, stepSize = 10) {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  // Calculate the difference between the current position and the center
+  const deltaX = centerX - x;
+  const deltaY = centerY - y;
+
+  // Determine the step sizes in both directions
+  const stepX = Math.abs(deltaX) * .05 * Math.sign(deltaX);
+  const stepY = Math.abs(deltaY) * .05 * Math.sign(deltaY);
+
+  // Update the position
+  const newX = x + stepX;
+  const newY = y + stepY;
+
+  return [newX, newY];
 }
 
 function getRandomInt(min = 0, max) {
