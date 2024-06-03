@@ -1,4 +1,14 @@
+const time = getTime();
 window.addEventListener('DOMContentLoaded', function(){
+	
+	let highscore = document.getElementsByTagName("main");
+	if(localStorage.getItem("highscore") && highscore)
+		highscore[0].innerHTML = "Highscore: " + localStorage.getItem("highscore");
+	
+	let timeEl = document.createElement('p');
+	document.body.appendChild(timeEl);
+	timeEl.innerHTML = getTime() - time;
+	
 	
 	let enemyNames = getProfi();
 	
@@ -10,6 +20,7 @@ window.addEventListener('DOMContentLoaded', function(){
 	},100);
 	
 	const runGame = setInterval( () =>{
+		timeEl.innerHTML = "SCORE: " + getScore();
 		enemies.forEach((enemy) => advanceEnemy(enemy));
 	},500);
 	
@@ -32,6 +43,14 @@ function spawnEnemyAtInterval(enemies, enemyNames){
 
 }
 
+function getScore(){
+	return Math.round((getTime() - time)/100)
+}
+	
+function getTime(){
+	const date= new Date();
+	return date.getTime();
+}
 function getProfi(){
 	const filenames = [
   "cezara1.png",
@@ -84,6 +103,10 @@ function addEnemy(enemies, enemyNames){
  function handleEnemyHover(event) {
 		event.target.style.backgroundColor = 'red'; // Change color on hover
 		setTimeout(() => {
+			
+			localStorage.setItem('highscore',Math.max(localStorage.getItem('highscore'), getScore()));
+			
+			sendPost('/gameOver',[]);
 			deleteEnemy(event.target);
 		}, 100);
 		/// console.log('Collision detected with', event.target);
@@ -178,6 +201,31 @@ function getRandomInt(min = 0, max) {
 
 function getRandomElement(vector){
 	return vector[getRandomInt(0,vector.length-1)];
+}
+async function sendPost(path,data){
+	try {
+      const response = await fetch(path, {
+				
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+
+      if (response.ok) {
+				console.log("ok");
+        // Redirect to loggedin.html if the request is successful
+        window.location.href = path;
+				return "";
+      } else {
+        // Handle error responses
+        const data = await response.json();
+				return data.message;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+			return "FETCHING ERROR!";
+    }
 }
 
 

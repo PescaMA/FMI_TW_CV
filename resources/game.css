@@ -1,3 +1,7 @@
 body{
 	overflow:hidden;
 }
+
+img{
+	   transition: left 0.8s, top 0.8s; /* Smooth transition for left and top properties */
+}

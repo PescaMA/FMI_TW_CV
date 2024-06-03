@@ -180,9 +180,15 @@ app.get("/about",function(req,res){
 });
 
 app.post("/game",function(req,res){
-	
 	res.sendFile('resources/game.html', { root: '.' });
-	 
+});
+
+
+app.get("/gameOver",function(req,res){
+	res.sendFile('resources/game.html', { root: '.' });
+});
+app.post("/gameOver",function(req,res){
+	res.sendFile('resources/game.html', { root: '.' });
 });
 
 app.get("/game",function(req,res){
