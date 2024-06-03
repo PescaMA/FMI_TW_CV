@@ -1,7 +1,27 @@
 body{
+	background-size: cover;
+	background-image:url("images/fmiVs.png");
 	overflow:hidden;
 }
+p,main{
+	display: inline-block;
+	background-color: violet;
+	color:rgb(249, 252, 104);
+}
+#killLog{
+	position: absolute; 
+	
+	left: 0; 
+	right: 0; 
+	margin-left: auto; 
+	margin-right: auto;
 
+	width: 100px; /* Need a specific value to work */
+	width: fit-content;
+	display: inline;;
+	background-color: white;
+	color:black;
+}
 img{
 	   transition: left 0.8s, top 0.8s; /* Smooth transition for left and top properties */
 }

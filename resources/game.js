@@ -1,7 +1,16 @@
 let time = getTime();
 let diff = 0;
 let pause = false;
+var mouseX,mouseY;
+var killLog;
 window.addEventListener('DOMContentLoaded', function(){
+	killLog = this.document.getElementById("killLog");
+
+
+	this.document.onmousemove = function(e) {
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+	};
 	
 	let highscore = document.getElementsByTagName("main");
 	if(localStorage.getItem("highscore") && highscore)
@@ -22,7 +31,7 @@ window.addEventListener('mousemove', (event) => {
     event.preventDefault();
 });
 // Detect cursor leaving the browser window
-document.addEventListener('mouseleave', (event) => {
+document.addEventListener('mouseout', (event) => {
 		pause = true;
 		diff = getTime();
 });
@@ -204,8 +213,8 @@ function advanceEnemy(enemy){
 	
 
 function advanceTowardsCenter(x, y, stepSize = 10) {
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
+  const centerX = mouseX;
+  const centerY = mouseY;
 
   // Calculate the difference between the current position and the center
   const deltaX = centerX - x;
@@ -255,6 +264,10 @@ async function sendPost(path,data){
     }
 }
 
+function updateKillLog(enemy1,enemy2){
+	
+}
+
 
 function getBoundingBox(element) {
 		const rect = element.getBoundingClientRect();
@@ -289,6 +302,8 @@ function checkEnemyCollisions(enemies) {
 								deleteEnemy(enemy2);
 								enemies.splice(j,1);
 								enemies.splice(i,1);
+								
+								updateKillLog(enemy1,enemy2);
 								
 						}
 				}
