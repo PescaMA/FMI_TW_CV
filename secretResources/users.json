@@ -1,10 +1,22 @@
 [
   {
     "username": "test",
-    "parola": "20367736"
+    "parola": 20367736
   },
   {
     "username": "matematica",
     "parola": "imposibil"
+  },
+  {
+    "username": "Joe",
+    "parola": 20367736
+  },
+  {
+    "username": "Joea",
+    "parola": 150955876
+  },
+  {
+    "username": "testa",
+    "parola": 20367736
   }
 ]
