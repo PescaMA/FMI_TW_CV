@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 window.addEventListener('DOMContentLoaded', function() {
 	
 	const body = document.body;

@@ -1,3 +1,5 @@
+/* jshint esversion: 8 */
+
 let time = getTime();
 let diff = 0;
 let pause = false;
@@ -80,7 +82,7 @@ function spawnEnemyAtInterval(enemies, enemyNames){
 }
 
 function getScore(){
-	return Math.round((getTime() - time)/100)
+	return Math.round((getTime() - time)/100);
 }
 	
 function getTime(){
@@ -221,8 +223,8 @@ function advanceTowardsCenter(x, y, stepSize = 10) {
   const deltaY = centerY - y;
 
   // Determine the step sizes in both directions
-  const stepX = Math.abs(deltaX) * .05 * Math.sign(deltaX);
-  const stepY = Math.abs(deltaY) * .05 * Math.sign(deltaY);
+  const stepX = Math.abs(deltaX) * 0.05 * Math.sign(deltaX);
+  const stepY = Math.abs(deltaY) * 0.05 * Math.sign(deltaY);
 
   // Update the position
   const newX = x + stepX;
@@ -231,7 +233,7 @@ function advanceTowardsCenter(x, y, stepSize = 10) {
   return [newX, newY];
 }
 
-function getRandomInt(min = 0, max) {
+function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 

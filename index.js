@@ -1,7 +1,11 @@
+/* jshint esversion: 6 */
+
+/// used https://www.site24x7.com/tools/javascript-validator.html for validation of js.
+
 /// modules
 const express = require('express');
 const session = require('express-session');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const app = express();
 const http = require("http");
 const path = require('path');
@@ -19,7 +23,7 @@ String.prototype.hash = function() {
 				hash ^= 5235612; /// also converts to 32-bit integer
     }
     return hash;
-}
+};
 
 function checkUsername(username){
 	if (!fs.existsSync(usersPath)){
@@ -30,7 +34,7 @@ function checkUsername(username){
       let data = fs.readFileSync(usersPath);
       let ob = JSON.parse(data);
      
-      for (i in ob) {
+      for (let i in ob) {
 				if (ob[i].username == username)
 					return true;
       }
@@ -46,7 +50,7 @@ function checkPassword (username, password) {
 		let data = fs.readFileSync(usersPath);
 		let ob = JSON.parse(data);
 	 
-		for (i in ob) {
+		for (let i in ob) {
 			if (ob[i].username == username){
 				if (ob[i].parola == password) 
 					return true;
@@ -100,7 +104,7 @@ app.use(session({
 }));
 
 // for parsing application/json in POST requests.
-app.use(bodyParser.json()) 
+app.use(bodyParser.json()) ;
 
 /// give access to every file present in the folder resources.
 app.use(express.static(path.join(__dirname, 'resources'))); 

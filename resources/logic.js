@@ -1,3 +1,4 @@
+/* jshint esversion: 8 */
 window.addEventListener('DOMContentLoaded', function(){
 	
 	const formElem = document.getElementById('formElem');
@@ -45,7 +46,7 @@ window.addEventListener('DOMContentLoaded', function(){
 		/// if invalid form don't submit.
 
 		 let dataVector = {};
-		 dataVector["loggedIn"] = localStorage.getItem("loggedIn");
+		 dataVector.loggedIn = localStorage.getItem("loggedIn");
 		formData.forEach(function(value, key){
 			if(key == 'password')
 				dataVector[key] = value.hash();
@@ -74,11 +75,11 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 function addLoggedButtons(){
 	
-	if(!localStorage['loggedIn'])
+	if(!localStorage.loggedIn)
 		return;
 	
 	let loggedButtons = document.getElementsByClassName("logged");
-	 for(e of loggedButtons){
+	 for(let e of loggedButtons){
 		 e.style.display = "block";
 	 }
 
@@ -143,4 +144,4 @@ String.prototype.hash = function() {
 				hash ^= 5235612; /// also converts to 32-bit integer
     }
     return hash;
-}
+};
