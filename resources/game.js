@@ -1,12 +1,15 @@
 /* jshint esversion: 8 */
 
-let time = getTime();
+let time;
 let diff = 0;
-let pause = false;
+let pause = false; /// will pause in DOM load
 var mouseX,mouseY;
 var killLog;
+
 window.addEventListener('DOMContentLoaded', function(){
 	killLog = this.document.getElementById("killLog");
+	time = getTime();
+	pauseGame();
 
 
 	this.document.onmousemove = function(e) {
@@ -23,47 +26,85 @@ window.addEventListener('DOMContentLoaded', function(){
 	timeEl.innerHTML = getTime() - time;
 	
 	
-	// Disable right-click context menu on specific elements
-window.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
-});
-// Disable mouse events
-window.addEventListener('mousemove', (event) => {
-    // Prevent default mousemove behavior
-    event.preventDefault();
-});
-// Detect cursor leaving the browser window
-document.addEventListener('mouseout', (event) => {
-		pause = true;
-		diff = getTime();
-});
-document.addEventListener('mouseover', (event) => {
-		if(pause)
-			time += getTime() - diff;
-		pause = false;
-		diff = 0;
-});
-
 	
+	// Disable right-click context menu on specific elements
+	window.addEventListener('contextmenu', (event) => {
+			event.preventDefault();
+	});
+	// Disable mouse events
+	window.addEventListener('mousemove', (event) => {
+			// Prevent default mousemove behavior
+			event.preventDefault();
+	});
+	// Detect cursor leaving the browser window
+	document.addEventListener('mouseout', (event) => {
+			pauseGame();
+	});
+	document.addEventListener('mouseover', (event) => {
+		if(!hasTouched)
+			unpauseGame();
+	});
 	
 	let enemyNames = getProfi();
 	
 	let enemies = [];
 	spawnEnemyAtInterval(enemies,enemyNames);
 	
+	handleTouchScreen();	
+	
 	const runCollision = setInterval( () =>{
 		checkEnemyCollisions(enemies);
 	},100);
 	
 	const runGame = setInterval( () =>{
-		if(!pause){	
+		if(pause)return;
+		
 		timeEl.innerHTML = "SCORE: " + getScore();
 		enemies.forEach((enemy) => advanceEnemy(enemy));
-		}
-	},500);
+
+	},100);
 	
 });
 
+
+
+var touchDuration = 1000; // 1 second
+var isTouching = false;
+var hasTouched = false;
+function handleTouchScreen(){
+	
+	document.addEventListener('touchstart', (event) => {
+		 handleTouchMousePos(event);
+    touchStartTime = getTime();
+    isTouching = true;
+		hasTouched = true;
+	});
+
+	// Handle touch end event
+	document.addEventListener('touchend', (event) => {	
+			isTouching = false;
+			pauseGame();
+	});
+	
+	document.addEventListener('touchmove',  handleTouchMousePos);
+	
+	
+	
+	const runTouchCheck = setInterval(() =>{
+		if(!isTouching) return;
+    let touchTime = getTime() - touchStartTime;
+    if (touchTime > touchDuration) {
+        unpauseGame();
+    } else {
+        pauseGame();
+    }
+	},100);
+}
+function handleTouchMousePos(event) {
+    let touch = event.touches[0];
+    mouseX = touch.clientX;
+    mouseY = touch.clientY;
+}
 
 let intervalTime = 3000; // Start with 3 seconds
 function spawnEnemyAtInterval(enemies, enemyNames){
@@ -71,7 +112,8 @@ function spawnEnemyAtInterval(enemies, enemyNames){
 	const minimumIntervalTime = 500; // Minimum time interval (e.g., 0.5 seconds)
 	const decreaseRate = 100; // Decrease the interval time by 100ms each iteration
 
-  addEnemy(enemies, enemyNames);
+	if(!pause)
+		addEnemy(enemies, enemyNames);
 
   // Decrease the interval time but do not go below the minimum interval time
   intervalTime = Math.max(intervalTime - decreaseRate, minimumIntervalTime);
@@ -86,9 +128,21 @@ function getScore(){
 }
 	
 function getTime(){
-	const date= new Date();
-	return date.getTime();
+	return new Date().getTime();
 }
+function pauseGame(){
+	if(pause)return;
+	pause = true;
+	diff = getTime();
+}
+function unpauseGame(){
+	if(!pause) return;
+	time += getTime() - diff;
+	/// console.log(time, getTime() - diff);
+	pause = false;
+	diff = 0;
+}
+	
 function getProfi(){
 	const filenames = [
   "cezara1.png",
@@ -158,8 +212,8 @@ function deleteEnemy(enemy){
 function spawnEnemy(enemy){
 	let width = +window.getComputedStyle(enemy).getPropertyValue("max-width").slice(0,-2);
 	let height = +window.getComputedStyle(enemy).getPropertyValue("max-height").slice(0,-2);
-	
 	let {x,y} = getCoords(width, height);
+	
 	
 	enemy.style.left = `${x}px`;
   enemy.style.top =  `${y}px`;
@@ -175,6 +229,7 @@ function getCoords(enemyWidth,enemyHeight){
 	let x, y;
 	let screenWidth = screen.width;
 	let screenHeight = screen.height;
+	
 
   // Determine spawn coordinates based on the selected side
   switch (selectedSide) {
@@ -298,7 +353,7 @@ function checkEnemyCollisions(enemies) {
 						const box1 = getBoundingBox(enemy1);
 						const box2 = getBoundingBox(enemy2);
 						if (isColliding(box1, box2)) {
-								console.log('Collision detected between enemies', i, 'and', j);
+								/// console.log('Collision detected between enemies', i, 'and', j);
 								
 								deleteEnemy(enemy1);
 								deleteEnemy(enemy2);
