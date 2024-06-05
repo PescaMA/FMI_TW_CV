@@ -210,7 +210,7 @@ function deleteEnemy(enemy){
 }
 
 function spawnEnemy(enemy){
-	let width = +window.getComputedStyle(enemy).getPropertyValue("max-width").slice(0,-2);
+	let width = +window.getComputedStyle(enemy).getPropertyValue("max-width").slice(0,-2); /// slice removes px.
 	let height = +window.getComputedStyle(enemy).getPropertyValue("max-height").slice(0,-2);
 	let {x,y} = getCoords(width, height);
 	

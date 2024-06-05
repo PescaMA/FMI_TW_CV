@@ -1,12 +1,23 @@
 :root {
-  --font-size: 2vw;
+  --font-size: min(4vw,4vh);
 }
 
 body{
 	height:100vh;
-	max-height:100vh;
+	display:flex;
+	flex-direction: column;
 	margin:0px;
 	padding:0px;
+	overflow:hidden;
+}
+h{
+	text-align:center;
+	text-decoration: underline;
+	font-size:  var(--font-size);
+}
+
+main{
+	height:100%;
 	display:flex;
 	flex-direction: column;
 	overflow:hidden;
@@ -25,7 +36,7 @@ form > ul{
 	height: 100%;
 }
 form > ul > li{
-	margin: 1rem;
+	margin: 3vh;
 }
 form > ul > li > label{
 	background:pink;

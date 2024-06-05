@@ -73,7 +73,14 @@ article{
 	display:grid;
 	grid-template-rows: 10vw 10vw auto;
 	height:100%;
-	
+}
+
+section{
+	height:100%;
+	display:flex;
+	flex-direction: column;
+	overflow-y: auto; /* Apply a vertical scrollbar if the content overflows */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 section > h2{
@@ -82,23 +89,27 @@ section > h2{
 	text-align:center;
 }
 
-
 .new-content{
 	font-size:40px;
 	white-space: pre-wrap;
 	display:block;
-	position:absolute;
 	text-align:left;
+	height:0px;
+	margin:0px;
+}
+p{
+	display:inline-block;
 }
 
-
-
 #info-studies:target:after{
+	display:inline-block;
+	height:100px;
 	content: "\
 	► I attended the National College \"Cantemir-Vodă\" from 2019 to 2023. \A\
 	► Studying for a bachelor's degree at Faculty of Mathematics and Computer Science since 2023. ";
 }
 #info-achivements:target:after{
+	height:100px;
 	content: "\
 	► Silver medal at National (Romanian) computer science competition, ONI, 2023. \A\
 	► 2nd place at Acadnet, software interoperability software, national phase.\A\

@@ -7,10 +7,10 @@ window.addEventListener('DOMContentLoaded', function(){
     /// add hover event listener to increase
 		for(const element of labels){
 				element.addEventListener("mouseover",function(e){
-					this.parentElement.className = "increase";
+						this.parentElement.classList.add("increase");
 				});
 				element.parentElement.addEventListener("mouseleave",function(e){
-					this.className = "";
+						this.classList.remove("increase");
 				});
 		}
 		
