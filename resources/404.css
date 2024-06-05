@@ -1,0 +1,26 @@
+body{
+	width:100vw;
+	height:100vh;
+	margin:0;
+	display:flex;
+	flex-direction: column;
+	overflow:hidden;
+	justify-content: flex-start;
+}
+
+main{
+	text-align: center;
+	font-size: 30px;
+	background: #9fe1ff;
+	color:#a00c0c;
+}
+video{
+	object-fit: contain;
+}
+
+@media all and (max-width: 500px), (max-height: 250px){
+		video{
+			visibility:hidden;
+			display:none;
+	}
+}

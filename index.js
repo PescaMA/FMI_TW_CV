@@ -84,7 +84,7 @@ function addUser(username,password){
 }
 
 function sendLogged(req,res,path,bypass=false){
-	console.log("in sendLogged: " + session.loggedIn);
+	/// console.log("in sendLogged: " + session.loggedIn);
 	if(session.loggedIn || bypass)	
 		res.sendFile(path, { root: '.' });
 	else
