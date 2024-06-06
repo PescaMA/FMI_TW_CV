@@ -1,0 +1,29 @@
+/* Apply styles to the body */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+main{
+	display:flex;
+		flex-direction:column;
+}
+
+/* Apply styles to h1 and h2 elements */
+h1, h2 {
+    color: #444;
+}
+
+/* Apply styles to p elements */
+p {
+    margin: 10px 0;
+}
+
+/* Apply styles to button element */
+#playGame {
+    height: 10vh;
+    width: 20vw;
+		align-self:center;
+}
