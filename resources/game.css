@@ -18,9 +18,13 @@ p,main{
 
 	width: 100px; /* Need a specific value to work */
 	width: fit-content;
-	display: inline;;
+	display: inline;
 	background-color: white;
 	color:black;
+}
+#killLog : hover{
+	transition: 1s scale;
+	transform: scale(1.8);
 }
 img{
 	   transition: left 0.8s, top 0.8s; /* Smooth transition for left and top properties */

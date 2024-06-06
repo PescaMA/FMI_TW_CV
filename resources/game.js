@@ -314,8 +314,23 @@ async function sendPost(path,data){
     }
 }
 
+function parseImage(path){
+	var regex = /\/enemies\/([a-zA-Z]+)\d*\.(\w+)/g;
+	return regex.exec(path)[1];
+}
+function revertTransition() {
+    // Remove transition
+		killLog.style.transition = "";
+    // Remove transformation
+    killLog.style.transform = "";
+}
 function updateKillLog(enemy1,enemy2){
+	killLog.innerHTML = parseImage(enemy1.src) + " KILLED " + parseImage(enemy2.src) ;
+	killLog.style.transition = "transform 1s";
+	killLog.style.transform = " scale(1.8)";
 	
+	// Add event listener to listen for transition end
+	killLog.addEventListener("transitionend", revertTransition);
 }
 
 
