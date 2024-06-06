@@ -183,9 +183,20 @@ app.get("/about",function(req,res){
 	sendLogged(req,res,'resources/about.html');
 });
 
+app.post("/gameIntro",function(req,res){
+	res.sendFile('resources/gameIntro.html', { root: '.' });
+});
+app.get("/gameIntro",function(req,res){
+	sendLogged(req,res,'resources/gameIntro.html',true);
+});
+
 app.post("/game",function(req,res){
 	res.sendFile('resources/game.html', { root: '.' });
 });
+app.get("/game",function(req,res){
+	sendLogged(req,res,'resources/game.html',true);
+});
+
 
 
 app.get("/gameOver",function(req,res){
@@ -195,10 +206,7 @@ app.post("/gameOver",function(req,res){
 	res.sendFile('resources/game.html', { root: '.' });
 });
 
-app.get("/game",function(req,res){
-	sendLogged(req,res,'resources/game.html',true);
-	
-});
+
 
 app.get("/",function(req,res){
 	res.sendFile('resources/form.html', { root: '.' });

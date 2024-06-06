@@ -1,5 +1,6 @@
 /* jshint esversion: 8 */
 
+const ENEMY_SPEED = 0.2;
 let time;
 let diff = 0;
 let pause = false; /// will pause in DOM load
@@ -11,22 +12,18 @@ window.addEventListener('DOMContentLoaded', function(){
 	time = getTime();
 	pauseGame();
 
-
-	this.document.onmousemove = function(e) {
-		mouseX = e.clientX;
-		mouseY = e.clientY;
-	};
-	
 	let highscore = document.getElementsByTagName("main");
 	if(localStorage.getItem("highscore") && highscore)
 		highscore[0].innerHTML = "Highscore: " + localStorage.getItem("highscore");
 	
 	let timeEl = document.createElement('p');
 	document.body.appendChild(timeEl);
-	timeEl.innerHTML = getTime() - time;
+	timeEl.innerHTML = "NO SCORE.";
 	
-	
-	
+	this.document.onmousemove = function(e) {
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+	};
 	// Disable right-click context menu on specific elements
 	window.addEventListener('contextmenu', (event) => {
 			event.preventDefault();
@@ -35,6 +32,7 @@ window.addEventListener('DOMContentLoaded', function(){
 	window.addEventListener('mousemove', (event) => {
 			// Prevent default mousemove behavior
 			event.preventDefault();
+			unpauseGame();
 	});
 	// Detect cursor leaving the browser window
 	document.addEventListener('mouseout', (event) => {
@@ -170,7 +168,7 @@ function getProfi(){
   "tiran2.png"
 ];
 filenames.forEach((e,i,v) =>{
-	v[i] = '/images/' + v[i];
+	v[i] = '/enemies/' + v[i];
 });
 	return filenames;
 }
@@ -256,34 +254,29 @@ function getCoords(enemyWidth,enemyHeight){
 }
 
 function advanceEnemy(enemy){
+	let width = +window.getComputedStyle(enemy).getPropertyValue("max-width").slice(0,-2); /// slice removes px.
+	let height = +window.getComputedStyle(enemy).getPropertyValue("max-height").slice(0,-2);
+	let XTopLeft = +window.getComputedStyle(enemy).getPropertyValue("left").slice(0,-2);
+	let YTopLeft = +window.getComputedStyle(enemy).getPropertyValue("top").slice(0,-2);
 	
-	let width = +window.getComputedStyle(enemy).getPropertyValue("left").slice(0,-2);
-	let height = +window.getComputedStyle(enemy).getPropertyValue("top").slice(0,-2);
+	let [x ,y ] = advanceTowardsMouse (XTopLeft + width/2,YTopLeft + height/2);
 	
-	let [x,y] = advanceTowardsCenter (width,height);
-	
-	enemy.style.left = `${x}px`;
-  enemy.style.top =  `${y}px`;
+	enemy.style.left = `${x - width/2}px`;
+  enemy.style.top =  `${y - height/2}px`;
 	
 	return {x,y};
 }
 	
 
-function advanceTowardsCenter(x, y, stepSize = 10) {
-  const centerX = mouseX;
-  const centerY = mouseY;
+function advanceTowardsMouse(x, y, stepSize = 10) {
 
   // Calculate the difference between the current position and the center
-  const deltaX = centerX - x;
-  const deltaY = centerY - y;
-
-  // Determine the step sizes in both directions
-  const stepX = Math.abs(deltaX) * 0.05 * Math.sign(deltaX);
-  const stepY = Math.abs(deltaY) * 0.05 * Math.sign(deltaY);
+  const deltaX = mouseX - x;
+  const deltaY = mouseY - y;
 
   // Update the position
-  const newX = x + stepX;
-  const newY = y + stepY;
+  const newX = x + deltaX * ENEMY_SPEED;
+  const newY = y + deltaY * ENEMY_SPEED;
 
   return [newX, newY];
 }

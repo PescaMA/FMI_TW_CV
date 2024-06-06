@@ -1,11 +1,11 @@
 body{
 	background-size: cover;
-	background-image:url("images/fmiVs.png");
+	background-image:url("enemies/fmiVs.png");
 	overflow:hidden;
 }
 p,main{
-	display: inline-block;
-	background-color: violet;
+	display: block;
+	background-color: #115705;
 	color:rgb(249, 252, 104);
 }
 #killLog{
@@ -24,4 +24,5 @@ p,main{
 }
 img{
 	   transition: left 0.8s, top 0.8s; /* Smooth transition for left and top properties */
+		 border: red 1px dotted;
 }
