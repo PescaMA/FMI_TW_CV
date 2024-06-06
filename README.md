@@ -7,9 +7,12 @@ Rularea se face cu nodeJS:
 
 `npm install` -> instaleaza dependentele node.
 
-`node index.js` -> porneste serverul ( de fapt am folosit `nodemon index.js` pt instant reloading dar s-ar putea sa necesite niste setup si n-are rost daca nu modifici codul)
+`node index.js` -> porneste serverul ( de fapt am folosit `nodemon index.js` pt instant reloading dar s-ar putea sa necesite niste setup si n-are rost daca nu modifici codul).
 
-`localhost:5000` -> accesabil in browser
+`localhost:5000` -> accesabil in browser.
+
+(la userii predefiniti parola este hasuita, ea fiind defapt "a1" la test si Joe)
+
 
 ## Rezolvare feedback proiect 1:
 
